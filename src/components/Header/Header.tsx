@@ -1,8 +1,13 @@
 import { FC } from 'react';
+import { ICurrenciesRates } from '../../types';
 
 import s from './Header.module.scss';
 
-const Header: FC = () => {
+interface IHeaderProps {
+	rates: ICurrenciesRates | null;
+}
+
+const Header: FC<IHeaderProps> = ({ rates }) => {
 	return (
 		<header className={s.header}>
 			<div className={s.header__leftBar}>
@@ -10,8 +15,12 @@ const Header: FC = () => {
 				<h2 className={s.header__title}>Сurrency Exchange</h2>
 			</div>
 			<div className={s.header__rightBar}>
-				<div>1 UAH = USD</div>
-				<div>1 UAH = EUR</div>
+				{rates && (
+					<>
+						<div>1 UAH = {(1 / rates.USD).toFixed(2)} USD</div>
+						<div>1 UAH = {(1 / rates.EUR).toFixed(2)} EUR</div>
+					</>
+				)}
 			</div>
 		</header>
 	);
