@@ -1,20 +1,88 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Paper, Box, Typography } from '@mui/material';
 import s from './Converter.module.scss';
 import ConverterItem from '../ConverterItem/ConverterItem';
-import { Currencies } from '../../types';
+import { Currencies, ICurrenciesRates } from '../../types';
 
-const Converter: FC = () => {
+interface IConverterProps {
+	rates: ICurrenciesRates | null;
+}
+
+const Converter: FC<IConverterProps> = ({ rates }) => {
+	const [fromCurrency, setFromCurrency] = useState<string>(Currencies.UAH);
+	const [toCurrency, setToCurrency] = useState<string>(Currencies.USD);
+
+	const [amount, setAmount] = useState<number>(1);
+	const [fromAmount, setFromAmount] = useState<number>(0);
+	const [toAmount, setToAmount] = useState<number>(0);
+
+	const [rate, setRate] = useState<number>(0);
+	const [isFromAmountChanged, setIsFromAmountChanged] = useState<boolean>(true);
+
+	const onChangeFromAmount = (value: number): void => {
+		if (!isNaN(value)) {
+			setAmount(value);
+			setIsFromAmountChanged(true);
+		}
+	};
+
+	const onChangeToAmount = (value: number): void => {
+		if (!isNaN(value)) {
+			setAmount(value);
+			setIsFromAmountChanged(false);
+		}
+	};
+
+	useEffect(() => {
+		if (isFromAmountChanged) {
+			setFromAmount(amount);
+			setToAmount(rate * amount);
+		} else {
+			setFromAmount((1 / rate) * amount);
+			setToAmount(amount);
+		}
+	}, [isFromAmountChanged, amount, rate]);
+
+	useEffect(() => {
+		if (rates) {
+			setRate(rates[toCurrency] / rates[fromCurrency]);
+		}
+	}, [rates, fromCurrency, toCurrency]);
+
 	return (
 		<section className={s.converter}>
 			<Paper elevation={2} className={s.converter__wrapper}>
-				<Box component="form" className={s.converter__form} noValidate autoComplete="off">
-					<ConverterItem initialCurrency={Currencies.UAH} />
-					<ConverterItem initialCurrency={Currencies.USD} />
+				<Box
+					component="form"
+					noValidate
+					autoComplete="off"
+					className={s.converter__form}
+				>
+					<ConverterItem
+						value={fromAmount}
+						onChangeAmount={onChangeFromAmount}
+						selectedCurrency={fromCurrency}
+						onChangeCurrency={setFromCurrency}
+					/>
+					<ConverterItem
+						value={toAmount}
+						onChangeAmount={onChangeToAmount}
+						selectedCurrency={toCurrency}
+						onChangeCurrency={setToCurrency}
+					/>
 				</Box>
-				<Typography variant="overline">rate</Typography>
+				{rates && (
+					<Typography
+						variant="overline"
+						display="block"
+						className={s.converter__rate}
+					>
+						1 {fromCurrency} = {rate} {toCurrency}
+					</Typography>
+				)}
 			</Paper>
 		</section>
 	);
 };
+
 export default Converter;

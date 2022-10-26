@@ -1,34 +1,37 @@
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { TextField, MenuItem } from '@mui/material';
 import s from './ConverterItem.module.scss';
 import { Currencies } from '../../types';
 
 interface IConverterItemProps {
-	initialCurrency: string;
+	value: number;
+	selectedCurrency: string;
+	onChangeCurrency: Dispatch<SetStateAction<string>>;
+	onChangeAmount: (value: number) => void;
 }
 
-const ConverterItem: FC<IConverterItemProps> = ({ initialCurrency }) => {
-	const [currentCurrency, setCurrentCurrency] = useState<string>(initialCurrency);
-
-	const onChangeCurrency = (currency: string) => {
-		setCurrentCurrency(currency);
-	};
-
+const ConverterItem: FC<IConverterItemProps> = ({
+	value,
+	selectedCurrency,
+	onChangeCurrency,
+	onChangeAmount,
+}) => {
 	return (
 		<div className={s.item}>
 			<TextField
+				value={value}
 				id="outlined-basic"
 				label="Enter amount"
 				variant="outlined"
 				inputProps={{
-					min: 0,
-					maxLength: 12,
+					maxLength: 14,
 				}}
+				onChange={(e) => onChangeAmount(+e.target.value)}
 			/>
 			<TextField
 				select
 				id="demo-simple-select"
-				value={currentCurrency}
+				value={selectedCurrency}
 				label="Currency"
 				onChange={(e) => onChangeCurrency(e.target.value)}
 			>
@@ -39,4 +42,5 @@ const ConverterItem: FC<IConverterItemProps> = ({ initialCurrency }) => {
 		</div>
 	);
 };
+
 export default ConverterItem;
