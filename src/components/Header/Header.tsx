@@ -1,12 +1,10 @@
-import { FC } from 'react';
-import { ICurrenciesRates } from '../../types';
+import { FC, useContext } from 'react';
+import { RatesContext } from '../../App';
 import s from './Header.module.scss';
 
-interface IHeaderProps {
-	rates: ICurrenciesRates | null;
-}
+const Header: FC = () => {
+	const rates = useContext(RatesContext);
 
-const Header: FC<IHeaderProps> = ({ rates }) => {
 	return (
 		<header className={s.header}>
 			<div className={s.header__leftBar}>

@@ -1,7 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, createContext } from 'react';
 import { ICurrenciesRates } from './types';
 import Header from './components/Header/Header';
 import Converter from './components/Converter/Converter';
+
+export const RatesContext = createContext<ICurrenciesRates | null>(null);
 
 const App: FC = () => {
 	const [rates, setRates] = useState<ICurrenciesRates | null>(null);
@@ -29,10 +31,10 @@ const App: FC = () => {
 	}, []);
 
 	return (
-		<>
-			<Header rates={rates} />
-			<Converter rates={rates} />
-		</>
+		<RatesContext.Provider value={rates}>
+			<Header />
+			<Converter />
+		</RatesContext.Provider>
 	);
 };
 

@@ -1,14 +1,13 @@
-import { FC, useEffect, useState, MouseEvent } from 'react';
+import { FC, useEffect, useState, MouseEvent, useContext } from 'react';
 import { Paper, Box, Typography } from '@mui/material';
-import { Currencies, ICurrenciesRates } from '../../types';
+import { RatesContext } from '../../App';
+import { Currencies } from '../../types';
 import ConverterItem from '../ConverterItem/ConverterItem';
 import s from './Converter.module.scss';
 
-interface IConverterProps {
-	rates: ICurrenciesRates | null;
-}
+const Converter: FC = () => {
+	const rates = useContext(RatesContext);
 
-const Converter: FC<IConverterProps> = ({ rates }) => {
 	const [fromCurrency, setFromCurrency] = useState<string>(Currencies.UAH);
 	const [toCurrency, setToCurrency] = useState<string>(Currencies.USD);
 
