@@ -17,8 +17,12 @@ const Header: FC<IHeaderProps> = ({ rates }) => {
 			<div className={s.header__rightBar}>
 				{rates && (
 					<>
-						<div>1 UAH = {(1 / rates.USD).toFixed(2)} USD</div>
-						<div>1 UAH = {(1 / rates.EUR).toFixed(2)} EUR</div>
+						<div>
+							<span>1 USD</span> = {(1 / rates.USD).toFixed(2)} UAH
+						</div>
+						<div>
+							<span>1 EUR</span> = {(1 / rates.EUR).toFixed(2)} UAH
+						</div>
 					</>
 				)}
 			</div>

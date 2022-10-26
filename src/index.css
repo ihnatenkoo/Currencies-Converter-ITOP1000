@@ -15,6 +15,7 @@
 	--gray-light: #f9fafb;
 	--gray-dark: #6b7280;
 	--white: #fff;
+	--orange: #fb923c;
 }
 
 body {
@@ -28,4 +29,14 @@ h1,
 h2,
 h3 {
 	margin: 0;
+}
+
+button {
+	padding: 0;
+	border: none;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: transparent;
+	cursor: pointer;
 }

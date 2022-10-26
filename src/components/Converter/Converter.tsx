@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, MouseEvent } from 'react';
 import { Paper, Box, Typography } from '@mui/material';
 import s from './Converter.module.scss';
 import ConverterItem from '../ConverterItem/ConverterItem';
@@ -31,6 +31,12 @@ const Converter: FC<IConverterProps> = ({ rates }) => {
 			setAmount(value);
 			setIsFromAmountChanged(false);
 		}
+	};
+
+	const handleSwitchCurrency = (e: MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		setFromCurrency(toCurrency);
+		setToCurrency(fromCurrency);
 	};
 
 	useEffect(() => {
@@ -70,6 +76,13 @@ const Converter: FC<IConverterProps> = ({ rates }) => {
 						selectedCurrency={toCurrency}
 						onChangeCurrency={setToCurrency}
 					/>
+
+					<button
+						className={s.converter__switch}
+						onClick={handleSwitchCurrency}
+					>
+						<span className="material-icons-outlined">currency_exchange</span>
+					</button>
 				</Box>
 				{rates && (
 					<Typography

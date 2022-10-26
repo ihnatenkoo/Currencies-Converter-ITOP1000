@@ -8,6 +8,7 @@
 	}
 
 	&__form {
+		position: relative;
 		padding: 50px 50px 25px;
 		display: flex;
 		justify-content: center;
@@ -17,5 +18,19 @@
 
 	&__rate {
 		text-align: center;
+	}
+
+	&__switch {
+		position: absolute;
+		top: 50%;
+		right: 20px;
+		color: var(--gray-dark);
+		user-select: none;
+		transition: transform 0.3s ease-in;
+
+		&:hover {
+			color: var(--orange);
+			transform: rotate(360deg);
+		}
 	}
 }

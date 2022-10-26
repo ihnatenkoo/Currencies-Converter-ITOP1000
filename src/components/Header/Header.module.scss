@@ -25,5 +25,9 @@
 	&__rightBar {
 		font-size: 15px;
 		gap: 0 40px;
+
+		span {
+			color: var(--orange);
+		}
 	}
 }
