@@ -1,0 +1,16 @@
+.converter {
+	display: flex;
+	justify-content: center;
+
+	&__wrapper {
+		width: 450px;
+		max-width: 90%;
+	}
+	&__form {
+		padding: 50px;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 25px 15px;
+	}
+}
