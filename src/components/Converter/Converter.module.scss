@@ -9,7 +9,7 @@
 
 	&__form {
 		position: relative;
-		padding: 50px 50px 25px;
+		padding: 40px 0px 25px;
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
@@ -20,17 +20,53 @@
 		text-align: center;
 	}
 
-	&__switch {
+	&__switchBtn {
 		position: absolute;
 		top: 50%;
-		right: 20px;
+		right: 5px;
 		color: var(--gray-dark);
 		user-select: none;
-		transition: transform 0.3s ease-in;
 
 		&:hover {
 			color: var(--orange);
 			transform: rotate(360deg);
+		}
+	}
+
+	&__loading {
+		text-align: center;
+	}
+}
+
+@media screen and (min-width: 375px) {
+	.converter {
+		&__switchBtn {
+			right: 15px;
+		}
+	}
+}
+
+@media screen and (min-width: 475px) {
+	.converter {
+		&__form {
+			padding: 50px 45px 25px;
+			gap: 25px 15px;
+		}
+
+		&__switchBtn {
+			right: 25px;
+		}
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.converter {
+		&__switchBtn {
+			transition: transform 0.3s ease-in;
+			&:hover {
+				color: var(--orange);
+				transform: rotate(360deg);
+			}
 		}
 	}
 }

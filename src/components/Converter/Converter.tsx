@@ -1,8 +1,8 @@
 import { FC, useEffect, useState, MouseEvent } from 'react';
 import { Paper, Box, Typography } from '@mui/material';
-import s from './Converter.module.scss';
-import ConverterItem from '../ConverterItem/ConverterItem';
 import { Currencies, ICurrenciesRates } from '../../types';
+import ConverterItem from '../ConverterItem/ConverterItem';
+import s from './Converter.module.scss';
 
 interface IConverterProps {
 	rates: ICurrenciesRates | null;
@@ -33,7 +33,7 @@ const Converter: FC<IConverterProps> = ({ rates }) => {
 		}
 	};
 
-	const handleSwitchCurrency = (e: MouseEvent<HTMLButtonElement>) => {
+	const handleSwitchCurrency = (e: MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		setFromCurrency(toCurrency);
 		setToCurrency(fromCurrency);
@@ -78,13 +78,13 @@ const Converter: FC<IConverterProps> = ({ rates }) => {
 					/>
 
 					<button
-						className={s.converter__switch}
+						className={s.converter__switchBtn}
 						onClick={handleSwitchCurrency}
 					>
 						<span className="material-icons-outlined">currency_exchange</span>
 					</button>
 				</Box>
-				{rates && (
+				{rates ? (
 					<Typography
 						variant="overline"
 						display="block"
@@ -92,6 +92,8 @@ const Converter: FC<IConverterProps> = ({ rates }) => {
 					>
 						1 {fromCurrency} = {rate} {toCurrency}
 					</Typography>
+				) : (
+					<p className={s.converter__loading}>Exchange rates loading...</p>
 				)}
 			</Paper>
 		</section>

@@ -1,6 +1,6 @@
 .header {
+	padding: 0 5px;
 	margin-bottom: 40px;
-	padding: 0 20px;
 	height: 50px;
 
 	display: flex;
@@ -11,7 +11,7 @@
 	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
 	&__title {
-		font-size: 18px;
+		font-size: 16px;
 		font-weight: 700;
 	}
 
@@ -23,11 +23,41 @@
 	}
 
 	&__rightBar {
-		font-size: 15px;
-		gap: 0 40px;
+		font-size: 14px;
+		gap: 0 10px;
 
-		span {
-			color: var(--orange);
+		&_currency {
+			text-align: center;
+			line-height: 1.2;
+			span {
+				color: var(--orange);
+				display: block;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 425px) {
+	.header {
+		padding: 0 20px;
+		&__title {
+			font-size: 18px;
+		}
+		&__rightBar {
+			font-size: 15px;
+			gap: 0 40px;
+		}
+	}
+}
+
+@media screen and (min-width: 575px) {
+	.header {
+		&__rightBar {
+			&_currency {
+				span {
+					display: inline;
+				}
+			}
 		}
 	}
 }

@@ -1,4 +1,15 @@
 .item {
 	display: flex;
 	gap: 0 15px;
+	&__input {
+		width: 120px;
+	}
+}
+
+@media screen and (min-width: 475px) {
+	.item {
+		&__input {
+			width: auto;
+		}
+	}
 }

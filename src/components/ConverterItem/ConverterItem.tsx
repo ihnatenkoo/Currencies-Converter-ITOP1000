@@ -1,7 +1,7 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { TextField, MenuItem } from '@mui/material';
-import s from './ConverterItem.module.scss';
 import { Currencies } from '../../types';
+import s from './ConverterItem.module.scss';
 
 interface IConverterItemProps {
 	value: number;
@@ -20,6 +20,7 @@ const ConverterItem: FC<IConverterItemProps> = ({
 		<div className={s.item}>
 			<TextField
 				value={value}
+				className={s.item__input}
 				id="outlined-basic"
 				label="Enter amount"
 				variant="outlined"
