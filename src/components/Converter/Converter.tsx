@@ -41,16 +41,16 @@ const Converter: FC = () => {
 	useEffect(() => {
 		if (isFromAmountChanged) {
 			setFromAmount(amount);
-			setToAmount(rate * amount);
+			setToAmount(+(rate * amount).toFixed(4));
 		} else {
-			setFromAmount((1 / rate) * amount);
+			setFromAmount(+((1 / rate) * amount).toFixed(4));
 			setToAmount(amount);
 		}
 	}, [isFromAmountChanged, amount, rate]);
 
 	useEffect(() => {
 		if (rates) {
-			setRate(rates[toCurrency] / rates[fromCurrency]);
+			setRate(+(rates[toCurrency] / rates[fromCurrency]).toFixed(4));
 		}
 	}, [rates, fromCurrency, toCurrency]);
 
